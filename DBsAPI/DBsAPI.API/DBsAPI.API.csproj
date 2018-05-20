@@ -177,7 +177,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Neo4jControllers\Neo4jController.cs" />
+    <Compile Include="Controllers\Neo4jControllers\StationsController.cs" />
+    <Compile Include="Controllers\Neo4jControllers\TramsRoutesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -253,6 +254,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBsAPI.DBsQueries\DBsAPI.DBsQueries.csproj">
+      <Project>{08a5020b-5613-45af-9357-6ac5d3fabcc8}</Project>
+      <Name>DBsAPI.DBsQueries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBsAPI.Model\DBsAPI.Model.csproj">
+      <Project>{D1F1C533-5B59-49F0-A1CC-9C79E45681F4}</Project>
+      <Name>DBsAPI.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBsAPI.SharedConstants\DBsAPI.SharedConstants.csproj">
+      <Project>{7B439CD6-3294-4450-B6EB-C49568E76742}</Project>
+      <Name>DBsAPI.SharedConstants</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBsAPI.SharedConstants", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBsAPI.API", "DBsAPI.API\DBsAPI.API.csproj", "{4C0B5B57-B587-4722-A5F7-77A92B119A38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBsAPI.Model", "DBsAPI.Model\DBsAPI.Model.csproj", "{D1F1C533-5B59-49F0-A1CC-9C79E45681F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4C0B5B57-B587-4722-A5F7-77A92B119A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0B5B57-B587-4722-A5F7-77A92B119A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C0B5B57-B587-4722-A5F7-77A92B119A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F1C533-5B59-49F0-A1CC-9C79E45681F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F1C533-5B59-49F0-A1CC-9C79E45681F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F1C533-5B59-49F0-A1CC-9C79E45681F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F1C533-5B59-49F0-A1CC-9C79E45681F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
