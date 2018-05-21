@@ -8,5 +8,10 @@
             public static readonly string user = "neo4j";
             public static readonly string password = "neo4jpassword";
         }
+
+        public static class Cassandra
+        {
+            public static readonly string uri = "127.0.0.1";
+        }
     }
 }
