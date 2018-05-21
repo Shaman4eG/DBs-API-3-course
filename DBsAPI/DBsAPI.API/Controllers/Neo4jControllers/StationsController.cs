@@ -1,4 +1,4 @@
-﻿using DBsAPI.DBsQueries;
+﻿using DBsAPI.DBsQueries.Neo4jQueries;
 using DBsAPI.Model.Neo4jEntities;
 using System.Web.Http;
 
@@ -7,11 +7,11 @@ namespace DBsAPI.API.Controllers.Neo4jControllers
     [RoutePrefix("api/stations")]
     public class StationsController : ApiController
     {
-        private readonly Neo4jQueries _neo4jQueries;
+        private readonly StationsQueries _neo4jQueries;
 
         public StationsController()
         {
-            _neo4jQueries = new Neo4jQueries();
+            _neo4jQueries = new StationsQueries();
         }
 
         [HttpPost]
