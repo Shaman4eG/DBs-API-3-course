@@ -4,7 +4,7 @@ using Cassandra.Data.Linq;
 using DBsAPI.Model.CassandraEntities;
 using System.Collections.Generic;
 
-namespace DBsAPI.DBsQueries
+namespace DBsAPI.DBsQueries.CassandraQueries
 {
     public class HistoryOfInspectionsQueries
     {

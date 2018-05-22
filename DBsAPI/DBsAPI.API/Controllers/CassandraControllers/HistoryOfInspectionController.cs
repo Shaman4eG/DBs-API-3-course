@@ -1,11 +1,11 @@
-﻿using DBsAPI.DBsQueries;
+﻿using DBsAPI.DBsQueries.CassandraQueries;
 using DBsAPI.Model.CassandraEntities;
 using System.Web.Http;
 using System.Collections.Generic;
 
 namespace DBsAPI.API.Controllers.CassandraControllers
 {
-    [RoutePrefix("api/history")]
+    [RoutePrefix("api/historyofinspection")]
     public class HistoryOfInspectionController : ApiController
     {
         private readonly HistoryOfInspectionsQueries historyOfInspectionsQueries;
@@ -34,7 +34,7 @@ namespace DBsAPI.API.Controllers.CassandraControllers
         }
 
         [HttpPost]
-        [Route("createinspections")]
+        [Route("createinspection")]
         public HistoryOfInspection CreateHistoryOfInspection(HistoryOfInspection historyOfInspection)
         {
 

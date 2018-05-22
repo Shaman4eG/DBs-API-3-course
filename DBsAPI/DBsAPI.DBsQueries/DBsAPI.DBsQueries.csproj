@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,7 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassandraQueries\CassandraEngine.cs" />
+    <Compile Include="CassandraQueries\HistoryOfIncidentQueries.cs" />
     <Compile Include="CassandraQueries\HistoryOfInspectionsQueries.cs" />
+    <Compile Include="CassandraQueries\HistoryOfRepairworksQueries.cs" />
+    <Compile Include="CassandraQueries\HistoryOfWorktimeQueries.cs" />
     <Compile Include="Neo4jQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

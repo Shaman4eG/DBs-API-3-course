@@ -2,7 +2,7 @@
 
 namespace DBsAPI.Model.CassandraEntities
 {
-    public class HistoryOfIncidient
+    public class HistoryOfIncident
     {
         public int TramID { get; set; }
         public DateTimeOffset Day { get; set; }
