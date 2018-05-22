@@ -6,7 +6,7 @@ namespace DBsAPI.Model.CassandraEntities
     {
         public int TramID { get; set; }
         public DateTimeOffset Day { get; set; }
-        public string Incidient { get; set; }
+        public string Incident { get; set; }
         public string Description { get; set; }
     }
 }
