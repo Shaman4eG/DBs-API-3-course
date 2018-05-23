@@ -38,8 +38,13 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
            return driverQueries.AddDriver(new Driver() { name = name, expirience = expirience, salary = salary, licensedformodels = licensedformodels });
         }
 
-        public void Put(int id, [FromBody]string value)
+        [Route("{id}")]
+        [HttpPut]
+        public Task Put(string id, string name, int? salary, int? expirience, [FromBody] string[] licensedformodels)
         {
+            if (name == null && salary == null && expirience == null && licensedformodels == null)
+                return new Task(() => { });
+            return driverQueries.UpdateDriver(id, name, salary, expirience, licensedformodels);
         }
 
         [Route("{id}")]
