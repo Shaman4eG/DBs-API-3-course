@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Collections;
 using DBsAPI.Helpers;
 using DBsAPI.Model.MongoDBEntities;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System.Threading.Tasks;
 
@@ -32,10 +29,8 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
 
         public async Task<Driver> ReadDriver(string id)
         {
-            var queryId = new ObjectId(id);
-            var filter = Builders<Driver>.Filter.Eq("_id", queryId);
+            var filter = CreateFilterById(id);
             return await driversCollection.Find(filter).FirstOrDefaultAsync();
-
         }
 
         public async Task AddDriver(Driver driver)
@@ -45,19 +40,37 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
 
         public async Task RemoveDriver(string id)
         {
-            var queryId = new ObjectId(id);
-            var filter = Builders<Driver>.Filter.Eq("_id", queryId);
+            var filter = CreateFilterById(id);
             await driversCollection.DeleteOneAsync(filter);
         }
 
-        //public async Task<UpdateResult> UpdateNote(string id, string body)
-        //{
-        //    var filter = Builders<Driver>.Filter.Eq()
-        //    var update = Builders<Driver>.Update
-        //                    .Set(s => s.Body, body)
-        //                    .CurrentDate(s => s.UpdatedOn);
+        public async Task UpdateDriver(string id, string name, int? salary, int? expirience, string[] licensedformodels)
+        {
+            var filter = CreateFilterById(id);
+            var update = Builders<Driver>.Update.Set("123", "qwe");
+            update.Set("3453", "sda");
 
-        //    return await driversCollection.UpdateOneAsync(filter, update);
-        //}
+
+
+            //if (name != null)
+            //    var update = updateBuilder.Set($"{nameof(Driver.name)}", name);
+
+            //if (salary != null)
+            //    updateBuilder.Set($"{nameof(Driver.salary)}", salary);
+
+            //if (expirience != null)
+            //    updateBuilder.Set($"{nameof(Driver.expirience)}", expirience);
+
+            //if (licensedformodels != null)
+            //    updateBuilder.Set($"{nameof(Driver.licensedformodels)}", licensedformodels);
+
+            //await driversCollection.UpdateOneAsync(filter, update);
+        }
+
+        private FilterDefinition<Driver> CreateFilterById(string id)
+        {
+            var queryId = new ObjectId(id);
+            return Builders<Driver>.Filter.Eq($"{nameof(Driver._id)}", queryId);
+        }
     }
 }
