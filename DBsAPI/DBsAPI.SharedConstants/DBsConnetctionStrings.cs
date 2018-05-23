@@ -8,5 +8,10 @@
             public static readonly string user = "neo4j";
             public static readonly string password = "neo4jpassword";
         }
+
+        public static class MongoDB
+        {
+            public static readonly string uri = "mongodb://localhost:27017";
+        }
     }
 }
