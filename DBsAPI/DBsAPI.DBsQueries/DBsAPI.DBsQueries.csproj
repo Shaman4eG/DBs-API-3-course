@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MongoDBQueries\DriverQueries.cs" />
+    <Compile Include="MongoDBQueries\ScheduleQueries.cs" />
     <Compile Include="Neo4jQueries\StationsQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
