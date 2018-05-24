@@ -42,9 +42,21 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
         [HttpPut]
         public Task Put(string id, string name, int? salary, int? expirience, [FromBody] string[] licensedformodels)
         {
-            if (name == null && salary == null && expirience == null && licensedformodels == null)
-                return new Task(() => { });
-            return driverQueries.UpdateDriver(id, name, salary, expirience, licensedformodels);
+            Task task = Task.Delay(0);
+           
+            if (name != null)
+                 task = driverQueries.UpdateDriver(id, $"{nameof(name)}", name);
+
+            if (salary != null)
+                task = driverQueries.UpdateDriver(id, $"{nameof(salary)}", salary);
+
+            if (expirience != null)
+                task = driverQueries.UpdateDriver(id, $"{nameof(expirience)}", expirience);
+
+            if (licensedformodels != null)
+                task = driverQueries.UpdateDriver(id, $"{nameof(licensedformodels)}", licensedformodels);
+
+            return task;
         }
 
         [Route("{id}")]
