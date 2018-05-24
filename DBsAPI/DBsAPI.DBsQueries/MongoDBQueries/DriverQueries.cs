@@ -44,27 +44,28 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
             await driversCollection.DeleteOneAsync(filter);
         }
 
-        public async Task UpdateDriver(string id, string name, int? salary, int? expirience, string[] licensedformodels)
+        public async Task UpdateDriver(string id, string fieldName, string fieldValue)
         {
             var filter = CreateFilterById(id);
-            var update = Builders<Driver>.Update.Set("123", "qwe");
-            update.Set("3453", "sda");
+            var update = Builders<Driver>.Update.Set(fieldName, fieldValue);
 
+            await driversCollection.UpdateOneAsync(filter, update);
+        }
 
+        public async Task UpdateDriver(string id, string fieldName, int? fieldValue)
+        {
+            var filter = CreateFilterById(id);
+            var update = Builders<Driver>.Update.Set(fieldName, fieldValue);
 
-            //if (name != null)
-            //    var update = updateBuilder.Set($"{nameof(Driver.name)}", name);
+            await driversCollection.UpdateOneAsync(filter, update);
+        }
 
-            //if (salary != null)
-            //    updateBuilder.Set($"{nameof(Driver.salary)}", salary);
+        public async Task UpdateDriver(string id, string fieldName, string[] fieldValue)
+        {
+            var filter = CreateFilterById(id);
+            var update = Builders<Driver>.Update.Set(fieldName, fieldValue);
 
-            //if (expirience != null)
-            //    updateBuilder.Set($"{nameof(Driver.expirience)}", expirience);
-
-            //if (licensedformodels != null)
-            //    updateBuilder.Set($"{nameof(Driver.licensedformodels)}", licensedformodels);
-
-            //await driversCollection.UpdateOneAsync(filter, update);
+            await driversCollection.UpdateOneAsync(filter, update);
         }
 
         private FilterDefinition<Driver> CreateFilterById(string id)
