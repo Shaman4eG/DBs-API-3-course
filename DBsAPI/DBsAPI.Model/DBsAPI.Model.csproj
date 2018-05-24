@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="MongoDBEntities\Driver.cs" />
     <Compile Include="MongoDBEntities\Schedule.cs" />
+    <Compile Include="MongoDBEntities\Tram.cs" />
     <Compile Include="Neo4jEntities\Route.cs" />
     <Compile Include="Neo4jEntities\Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

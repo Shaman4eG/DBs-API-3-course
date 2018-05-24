@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MongoDBControllers\DriversController.cs" />
     <Compile Include="Controllers\MongoDBControllers\ScheduleController.cs" />
+    <Compile Include="Controllers\MongoDBControllers\TramsController.cs" />
     <Compile Include="Controllers\Neo4jControllers\StationsController.cs" />
     <Compile Include="Controllers\Neo4jControllers\TramsRoutesController.cs" />
     <Compile Include="Global.asax.cs">
