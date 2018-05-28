@@ -29,9 +29,9 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
         }
 
         [HttpPost]
-        public Task Post(string stationName, int tramRoute, int interval, string firstStopTime, string lastStopTime)
+        public Task Post(Schedule schedule)
         {
-            return scheduleQueries.AddSchedule(new Schedule() { stationName = stationName, tramRoute = tramRoute, interval = interval, firstStopTime = firstStopTime, lastStopTime = lastStopTime });
+            return scheduleQueries.AddSchedule(schedule);
         }
 
         [Route("{id}")]

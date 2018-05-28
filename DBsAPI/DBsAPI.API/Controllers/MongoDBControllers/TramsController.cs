@@ -29,9 +29,9 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
         }
 
         [HttpPost]
-        public Task Post(int number, int route, string model, [FromBody] Tram.Capacity capacity)
+        public Task Post(Tram tram)
         {
-           return tramQueries.AddTram(new Tram() { number = number, route = route, model = model, capacity = capacity });
+           return tramQueries.AddTram(tram);
         }
 
         [Route("{id}")]

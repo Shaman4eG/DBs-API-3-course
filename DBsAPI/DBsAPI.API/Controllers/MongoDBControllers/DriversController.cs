@@ -29,9 +29,9 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
         }
 
         [HttpPost]
-        public Task Post(string name, int expirience, int salary,[FromBody] string[] licensedformodels)
+        public Task Post(Driver driver)
         {
-           return driverQueries.AddDriver(new Driver() { name = name, expirience = expirience, salary = salary, licensedformodels = licensedformodels });
+           return driverQueries.AddDriver(driver);
         }
 
         [Route("{id}")]
