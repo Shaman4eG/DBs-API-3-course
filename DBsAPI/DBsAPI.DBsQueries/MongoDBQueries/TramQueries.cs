@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using Bogus;
 using DBsAPI.Helpers;
 using DBsAPI.Model.MongoDBEntities;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Threading.Tasks;
 
 namespace DBsAPI.DBsQueries.MongoDBQueries
 {
@@ -11,9 +16,9 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
     {
         private readonly string uri = DBsConnetctionStrings.MongoDB.uri;
 
-        private MongoClient client;
-        private IMongoDatabase db;
-        private IMongoCollection<Tram> TramsCollection;
+        private readonly MongoClient client;
+        private readonly IMongoDatabase db;
+        private readonly IMongoCollection<Tram> TramsCollection;
 
         public TramQueries()
         {
@@ -25,7 +30,6 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
         public async Task<IEnumerable<Tram>> ReadAllTrams()
         {
             return await TramsCollection.Find(new BsonDocument()).ToListAsync();
-
         }
 
         public async Task<Tram> ReadTram(string id)
@@ -67,6 +71,39 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
             var update = Builders<Tram>.Update.Set(fieldName, fieldValue);
 
             await TramsCollection.UpdateOneAsync(filter, update);
+        }
+
+        public async Task<long> PopulateTrams(int size)
+        {
+            var collection = new List<Tram>(size);
+
+            var watch = Stopwatch.StartNew();
+
+            using (var sw = new StreamWriter(@"C:\Users\vladimir.bakshenov\Downloads\Private\test.json"))
+            {
+                for (var i = 0; i < size; i++)
+                {
+                    var fake = new Faker<Tram>()
+                        .RuleFor(t => t.number, f => f.Random.Number(1, 1000))
+                        .RuleFor(t => t.model, f => f.Lorem.Word())
+                        .RuleFor(t => t.route, f => f.Random.Number(1, 1000))
+                        .RuleFor(t => t.capacity, new Faker<Tram.Capacity>()
+                            .RuleFor(c => c.disabled, f => f.Random.Number(1, 100))
+                            .RuleFor(c => c.sit, f => f.Random.Number(1, 100))
+                            .RuleFor(c => c.stay, f => f.Random.Number(1, 100))
+                        ).Generate();
+                    var json = new JavaScriptSerializer().Serialize(fake);
+                    sw.Write(json);
+
+                }
+                  
+            }
+
+            //await TramsCollection.InsertManyAsync(collection);
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+
+            return elapsedMs;
         }
 
         private FilterDefinition<Tram> CreateFilterById(string id)

@@ -61,5 +61,12 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
         {
             return tramQueries.RemoveTram(id);
         }
+
+        [Route("populate")]
+        [HttpGet]
+        public Task<long> Populate(int size)
+        {
+            return tramQueries.PopulateTrams(size);
+        }
     }
 }
