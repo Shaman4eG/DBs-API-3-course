@@ -48,6 +48,8 @@
     <Reference Include="MongoDB.Driver.Core, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Driver.Core.2.6.1\lib\net45\MongoDB.Driver.Core.dll</HintPath>
       <Private>True</Private>
+    <Reference Include="Cassandra, Version=3.99.0.0, Culture=neutral, PublicKeyToken=10b231fbfc8c4b4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\CassandraCSharpDriver.3.5.0\lib\net45\Cassandra.dll</HintPath>
     </Reference>
     <Reference Include="Neo4j.Driver, Version=1.6.58.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neo4j.Driver.1.6.0\lib\net452\Neo4j.Driver.dll</HintPath>
@@ -64,6 +66,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +78,11 @@
     <Compile Include="MongoDBQueries\DriverQueries.cs" />
     <Compile Include="MongoDBQueries\ScheduleQueries.cs" />
     <Compile Include="MongoDBQueries\TramQueries.cs" />
+    <Compile Include="CassandraQueries\CassandraEngine.cs" />
+    <Compile Include="CassandraQueries\HistoryOfIncidentQueries.cs" />
+    <Compile Include="CassandraQueries\HistoryOfInspectionsQueries.cs" />
+    <Compile Include="CassandraQueries\HistoryOfRepairworksQueries.cs" />
+    <Compile Include="CassandraQueries\HistoryOfWorktimeQueries.cs" />
     <Compile Include="Neo4jQueries\StationsQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
