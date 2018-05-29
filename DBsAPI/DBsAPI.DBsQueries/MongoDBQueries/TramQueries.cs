@@ -73,37 +73,34 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
             await TramsCollection.UpdateOneAsync(filter, update);
         }
 
-        public async Task<long> PopulateTrams(int size)
+        public long PopulateTrams(int size)
         {
-            var collection = new List<Tram>(size);
-
             var watch = Stopwatch.StartNew();
 
+            //
+            // ИЗМЕНИ ПУТЬ ДО НУЖНОГО ТЕБЕ ФАЙЛА
+            //
             using (var sw = new StreamWriter(@"C:\Users\vladimir.bakshenov\Downloads\Private\test.json"))
             {
                 for (var i = 0; i < size; i++)
                 {
-                    var fake = new Faker<Tram>()
+                    var fakeTram = new Faker<Tram>()
                         .RuleFor(t => t.number, f => f.Random.Number(1, 1000))
                         .RuleFor(t => t.model, f => f.Lorem.Word())
                         .RuleFor(t => t.route, f => f.Random.Number(1, 1000))
                         .RuleFor(t => t.capacity, new Faker<Tram.Capacity>()
                             .RuleFor(c => c.disabled, f => f.Random.Number(1, 100))
                             .RuleFor(c => c.sit, f => f.Random.Number(1, 100))
-                            .RuleFor(c => c.stay, f => f.Random.Number(1, 100))
-                        ).Generate();
-                    var json = new JavaScriptSerializer().Serialize(fake);
-                    sw.Write(json);
+                            .RuleFor(c => c.stay, f => f.Random.Number(1, 100)))
+                        .Generate();
 
+                    sw.Write(new JavaScriptSerializer().Serialize(fakeTram));
                 }
-                  
             }
 
-            //await TramsCollection.InsertManyAsync(collection);
             watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
 
-            return elapsedMs;
+            return watch.ElapsedMilliseconds;
         }
 
         private FilterDefinition<Tram> CreateFilterById(string id)
