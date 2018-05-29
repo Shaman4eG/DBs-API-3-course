@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using DBsAPI.Helpers;
 using DBsAPI.Model.MongoDBEntities;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using Bogus;
 
 namespace DBsAPI.DBsQueries.MongoDBQueries
 {
@@ -58,6 +62,34 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
             var update = Builders<Schedule>.Update.Set(fieldName, fieldValue);
 
             await SchedulesCollection.UpdateOneAsync(filter, update);
+        }
+
+        public long PopulateSchedule(int size)
+        {
+            var watch = Stopwatch.StartNew();
+
+            //
+            // ИЗМЕНИ ПУТЬ ДО НУЖНОГО ТЕБЕ ФАЙЛА
+            //
+            using (var sw = new StreamWriter(@"C:\Users\vladimir.bakshenov\Downloads\Private\testSchedule.json"))
+            {
+                for (var i = 0; i < size; i++)
+                {
+                    var fakeSchedule = new Faker<Schedule>()
+                        .RuleFor(s => s.tramRoute, f => f.Random.Number(1, 1000))
+                        .RuleFor(s => s.interval, f => f.Random.Number(1,60))
+                        .RuleFor(s => s.stationName, f => f.Lorem.Word())
+                        .RuleFor(s => s.firstStopTime, f => f.Date.Soon(1).ToShortTimeString())
+                        .RuleFor(s => s.lastStopTime, f => f.Date.Soon(1).ToShortTimeString())
+                        .Generate();
+
+                    sw.Write(new JavaScriptSerializer().Serialize(fakeSchedule));
+                }
+            }
+
+            watch.Stop();
+
+            return watch.ElapsedMilliseconds;
         }
 
         private FilterDefinition<Schedule> CreateFilterById(string id)

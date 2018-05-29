@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using DBsAPI.Helpers;
 using DBsAPI.Model.MongoDBEntities;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using Bogus;
 
 namespace DBsAPI.DBsQueries.MongoDBQueries
 {
@@ -66,6 +70,33 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
             var update = Builders<Driver>.Update.Set(fieldName, fieldValue);
 
             await driversCollection.UpdateOneAsync(filter, update);
+        }
+
+        public long PopulateDrivers(int size)
+        {
+            var watch = Stopwatch.StartNew();
+
+            //
+            // ИЗМЕНИ ПУТЬ ДО НУЖНОГО ТЕБЕ ФАЙЛА
+            //
+            using (var sw = new StreamWriter(@"C:\Users\vladimir.bakshenov\Downloads\Private\testDriver.json"))
+            {
+                for (var i = 0; i < size; i++)
+                {
+                    var fakeDriver = new Faker<Driver>()
+                            .RuleFor(d => d.expirience, f => f.Random.Number(1, 40))
+                            .RuleFor(d => d.salary, f => f.Random.Number(10000, 50000))
+                            .RuleFor(d => d.name, f => f.Name.FullName())
+                            .RuleFor(d => d.licensedformodels, f => f.Lorem.Words(i%5+1))
+                            .Generate();
+
+                    sw.Write(new JavaScriptSerializer().Serialize(fakeDriver));
+                }
+            }
+
+            watch.Stop();
+
+            return watch.ElapsedMilliseconds;
         }
 
         private FilterDefinition<Driver> CreateFilterById(string id)

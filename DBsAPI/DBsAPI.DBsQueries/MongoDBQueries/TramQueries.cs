@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Bogus;
@@ -80,7 +79,7 @@ namespace DBsAPI.DBsQueries.MongoDBQueries
             //
             // ИЗМЕНИ ПУТЬ ДО НУЖНОГО ТЕБЕ ФАЙЛА
             //
-            using (var sw = new StreamWriter(@"C:\Users\vladimir.bakshenov\Downloads\Private\test.json"))
+            using (var sw = new StreamWriter(@"C:\Users\vladimir.bakshenov\Downloads\Private\testTrams.json"))
             {
                 for (var i = 0; i < size; i++)
                 {
