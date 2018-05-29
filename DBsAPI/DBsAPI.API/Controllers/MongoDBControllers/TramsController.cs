@@ -64,7 +64,7 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
 
         [Route("populate")]
         [HttpGet]
-        public Task<long> Populate(int size)
+        public long Populate(int size)
         {
             return tramQueries.PopulateTrams(size);
         }

@@ -65,5 +65,12 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
             return scheduleQueries.RemoveSchedule(id);
         }
 
+        [Route("populate")]
+        [HttpGet]
+        public long Populate(int size)
+        {
+            return scheduleQueries.PopulateSchedule(size);
+        }
+
     }
 }

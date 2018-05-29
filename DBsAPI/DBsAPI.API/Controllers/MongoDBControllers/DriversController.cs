@@ -61,5 +61,12 @@ namespace DBsAPI.API.Controllers.MongoDBControllers
         {
             return driverQueries.RemoveDriver(id);
         }
+
+        [Route("populate")]
+        [HttpGet]
+        public long Populate(int size)
+        {
+            return driverQueries.PopulateDrivers(size);
+        }
     }
 }
