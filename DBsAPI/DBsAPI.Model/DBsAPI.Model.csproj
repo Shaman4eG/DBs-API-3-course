@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CassandraEntities\HistoryOfIncident.cs" />
+    <Compile Include="CassandraEntities\HistoryOfInspection.cs" />
+    <Compile Include="CassandraEntities\HistoryOfRepairwork.cs" />
+    <Compile Include="CassandraEntities\HistoryOfWorktime.cs" />
     <Compile Include="Neo4jEntities\Route.cs" />
     <Compile Include="Neo4jEntities\Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
