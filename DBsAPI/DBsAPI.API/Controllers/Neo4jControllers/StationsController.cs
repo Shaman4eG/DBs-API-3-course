@@ -1,7 +1,7 @@
 ﻿using System;
-using DBsAPI.DBsQueries;
 using DBsAPI.Model.Neo4jEntities;
 using System.Web.Http;
+using DBsAPI.DBsQueries.DBsQueries.Neo4jQueries;
 
 namespace DBsAPI.API.Controllers.Neo4jControllers
 {

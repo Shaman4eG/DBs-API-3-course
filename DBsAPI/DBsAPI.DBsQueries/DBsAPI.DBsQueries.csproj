@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StationQueries.cs" />
+    <Compile Include="DBsQueries\Neo4jQueries\StationQueries.cs" />
+    <Compile Include="DBsQueries\Neo4jQueries\TramRouteQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

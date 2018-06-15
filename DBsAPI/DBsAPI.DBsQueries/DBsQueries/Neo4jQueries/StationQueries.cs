@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using DBsAPI.Helpers;
-using Neo4j.Driver.V1;
 using System.Linq;
+using DBsAPI.Helpers;
 using DBsAPI.Model.Neo4jEntities;
 using Neo4jClient;
 using Neo4jClient.Cypher;
 
-namespace DBsAPI.DBsQueries
+namespace DBsAPI.DBsQueries.DBsQueries.Neo4jQueries
 {
     public class StationQueries
     {
