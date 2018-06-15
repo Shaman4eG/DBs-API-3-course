@@ -8,27 +8,39 @@ namespace DBsAPI.API.Controllers.Neo4jControllers
     [RoutePrefix("api/stations")]
     public class StationsController : ApiController
     {
-        private readonly Neo4jQueries _neo4jQueries;
+        private readonly StationQueries _stationQueries;
 
         public StationsController()
         {
-            _neo4jQueries = new Neo4jQueries();
+            _stationQueries = new StationQueries();
         }
 
         [HttpPost]
         [Route("createstation")]
-        public int? CreateStation(Station station)
+        public Guid CreateStation(Station station)
         {
-            var id = _neo4jQueries.CreateStation(station);
-            return id;
+            return _stationQueries.CreateStation(station);
         }
 
         [HttpGet]
-        [Route("getstation/{id:Guid}")]
-        public Station GetStation(Guid id)
+        [Route("getstation/{stationId:Guid}")]
+        public Station GetStation(Guid stationId)
         {
-            var station = _neo4jQueries.GetStation(id);
-            return station;
+            return _stationQueries.GetStation(stationId);
+        }
+
+        [HttpPut]
+        [Route("updatestation")]
+        public Station UpdateStation(Station station)
+        {
+            return _stationQueries.UpdateStation(station);
+        }
+
+        [HttpDelete]
+        [Route("deletestation/{stationId:Guid}")]
+        public void DeleteStation(Guid stationId)
+        {
+            _stationQueries.DeleteStation(stationId);
         }
     }
 }

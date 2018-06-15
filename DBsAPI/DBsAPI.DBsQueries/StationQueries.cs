@@ -24,34 +24,25 @@ namespace DBsAPI.DBsQueries
             client.Connect();
         }
 
-        public int? CreateStation(Station station)
+        public Guid CreateStation(Station station)
         {
-            int? id = 100500;
+            if (String.IsNullOrWhiteSpace(station?.name)
+                || station.startStation == null
+                || station.endStation == null
+                || station.intermediateStation == null)
+            {
+                return Guid.Empty;
+            }
 
-            //var validData = CheckStationDataIntegrity(station);
-            //if (!validData) return null;
+            station.id = Guid.NewGuid();
 
-            //FillStationData(station);
+            client
+                .Cypher
+                .Create("(s:Station {station})")
+                .WithParam("station", station)
+                .ExecuteWithoutResults();
 
-            //try
-            //{
-            //    using (var session = _driver.Session())
-            //    {
-            //        id = session.WriteTransaction(tx =>
-            //        {
-            //            var result = tx.Run($"CREATE (s:{station.Label}) " +
-            //                                $"SET s.name = '{station.Name}' " +
-            //                                "RETURN id(s)");
-            //            return result.Single()[0].As<int>();
-            //        });
-            //    }
-            //}
-            //catch
-            //{
-            //    id = null;
-            //}
-
-            return id;
+            return station.id;
         }
 
         public Station GetStation(Guid stationId)
@@ -70,7 +61,7 @@ namespace DBsAPI.DBsQueries
                     }
                 ).Results.ToList();
 
-            if (!result.Any()) return new Station(); 
+            if (!result.Any()) return null; 
 
             return new Station()
             {
@@ -82,27 +73,42 @@ namespace DBsAPI.DBsQueries
             };
         }
 
-        #region Helpers
-
-        //private bool CheckStationDataIntegrity(Station station)
-        //{
-        //    if (string.IsNullOrEmpty(station?.Name)) return false;
-
-        //    return true;
-        //}
-
-        //private void FillStationData(Station station)
-        //{
-        //    station.Label = "Station";
-        //}
-
-        private Station ConvertToStation(IEnumerable stationHolder)
+        public Station UpdateStation(Station station)
         {
+            if (String.IsNullOrWhiteSpace(station?.name)
+                || station.startStation == null
+                || station.endStation == null
+                || station.intermediateStation == null)
+            {
+                return null;
+            }
 
+            client
+                .Cypher
+                .Match("(s:Station)")
+                .Where((Station s) => s.id == station.id)
+                .Set("s = {updatedStation}")
+                .WithParam("updatedStation", station)
+                .ExecuteWithoutResults();
 
-            return null;
+            return station;
         }
 
-        #endregion
+        public void DeleteStation(Guid stationId)
+        {
+            //client
+            //    .Cypher
+            //    .Match("(s:Station)")
+            //    .Where((Station s) => s.id == stationId)
+            //    .DetachDelete("s")
+            //    .ExecuteWithoutResults();
+
+            var queryText = "MATCH (s:Station) " +
+                            $"WHERE s.id = '{stationId}' " +
+                            "DETACH DELETE s";
+            CypherQuery query = new CypherQuery(queryText, null, CypherResultMode.Projection, CypherResultFormat.DependsOnEnvironment); 
+
+            ((IRawGraphClient) client).ExecuteCypher(query);
+        }
     }
 }
