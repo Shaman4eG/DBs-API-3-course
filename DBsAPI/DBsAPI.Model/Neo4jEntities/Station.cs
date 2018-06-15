@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DBsAPI.Model.Neo4jEntities
 {
     public class Station
     {
-        public string Label { get; set; }
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public List<int> StartStation;
-        public List<int> EndStation;
+        public static readonly string Label = "Station";
+
+        public Guid id { get; set; }
+        public string name { get; set; }
+        public List<int> startStation;
+        public List<int> endStation;
+        public List<int> intermediateStation;
     }
 }

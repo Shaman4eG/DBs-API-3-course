@@ -1,4 +1,5 @@
-﻿using DBsAPI.DBsQueries;
+﻿using System;
+using DBsAPI.DBsQueries;
 using DBsAPI.Model.Neo4jEntities;
 using System.Web.Http;
 
@@ -23,8 +24,8 @@ namespace DBsAPI.API.Controllers.Neo4jControllers
         }
 
         [HttpGet]
-        [Route("getstation/{id:int}")]
-        public Station GetStation(int id)
+        [Route("getstation/{id:Guid}")]
+        public Station GetStation(Guid id)
         {
             var station = _neo4jQueries.GetStation(id);
             return station;

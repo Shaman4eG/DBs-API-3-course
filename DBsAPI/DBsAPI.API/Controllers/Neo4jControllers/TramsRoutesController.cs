@@ -7,11 +7,11 @@ namespace DBsAPI.Controllers.Neo4jControllers
     [RoutePrefix("api/tramsroutes")]
     public class TramsRoutesController : ApiController
     {
-        private readonly Neo4jQueries _neo4jQueries;
+        private readonly StationQueries _stationQueries;
 
         public TramsRoutesController()
         {
-            _neo4jQueries = new Neo4jQueries();
+            _stationQueries = new StationQueries();
         }
 
         [Route("createroute")]
