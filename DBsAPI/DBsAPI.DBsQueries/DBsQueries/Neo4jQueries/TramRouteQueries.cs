@@ -100,5 +100,70 @@ namespace DBsAPI.DBsQueries.DBsQueries.Neo4jQueries
 
             ((IRawGraphClient)_client).ExecuteCypher(query);
         }
+
+
+
+        #region DataGenerator
+
+        /* Получим 2.000.002 элементов с данными. 
+         * Станций: 668.886 
+         * Путей сообщения: 1.333.334
+         * */
+        private const int NumberOfIterations = 668886;
+
+        private Random randomsGenerator = new Random();
+
+        private Guid currentStationFrom;
+        private Guid currentStationTo;
+
+        public void GenerateData()
+        {
+            currentStationFrom = _stationQueries.CreateStation(GenerateStation());
+
+            for (int i = 0; i < NumberOfIterations; i++)
+            {
+                currentStationTo = _stationQueries.CreateStation(GenerateStation());
+                CreateTramRoute(GenerateTramRoute());
+                CreateTramRoute(GenerateTramRoute());
+                currentStationFrom = currentStationTo;
+            }
+        }
+
+        private Station GenerateStation()
+        {
+            return new Station
+            {
+                name = "s",
+                startStation = GenerateTrams(),
+                endStation = GenerateTrams(),
+                intermediateStation = GenerateTrams()
+            };
+        }
+
+        private List<int> GenerateTrams()
+        {
+            int numberOfTrams = randomsGenerator.Next(0, 2);
+
+            var trams = new List<int>();
+
+            for (int i = 0; i < numberOfTrams; i++)
+            {
+                trams.Add(randomsGenerator.Next(1, 100000));
+            }
+
+            return trams;
+        }
+
+        private TramRoute GenerateTramRoute()
+        {
+            return new TramRoute()
+            {
+                stationFrom = currentStationFrom,
+                stationTo = currentStationTo,
+                travelsThrough = GenerateTrams()
+            };
+        }
+
+        #endregion
     }
 }

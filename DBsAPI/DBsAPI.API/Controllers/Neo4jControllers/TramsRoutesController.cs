@@ -42,5 +42,18 @@ namespace DBsAPI.API.Controllers.Neo4jControllers
         {
             _tramRouteQueries.DeleteTramRoute(tramRouteId);
         }
+
+
+
+        #region DataGenerator
+
+        [HttpPost]
+        [Route("generatedata")]
+        public void GenerateData()
+        {
+            _tramRouteQueries.GenerateData();
+        }
+
+        #endregion
     }
 }
