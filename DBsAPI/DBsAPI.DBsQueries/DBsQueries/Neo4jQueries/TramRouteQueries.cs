@@ -123,8 +123,8 @@ namespace DBsAPI.DBsQueries.DBsQueries.Neo4jQueries
             for (int i = 0; i < NumberOfIterations; i++)
             {
                 currentStationTo = _stationQueries.CreateStation(GenerateStation());
-                CreateTramRoute(GenerateTramRoute());
-                CreateTramRoute(GenerateTramRoute());
+                CreateTramRoute(GenerateTramRoute(currentStationFrom, currentStationTo));
+                CreateTramRoute(GenerateTramRoute(currentStationTo, currentStationFrom));
                 currentStationFrom = currentStationTo;
             }
         }
@@ -142,7 +142,7 @@ namespace DBsAPI.DBsQueries.DBsQueries.Neo4jQueries
 
         private List<int> GenerateTrams()
         {
-            int numberOfTrams = randomsGenerator.Next(0, 2);
+            int numberOfTrams = randomsGenerator.Next(0, 3);
 
             var trams = new List<int>();
 
@@ -154,12 +154,12 @@ namespace DBsAPI.DBsQueries.DBsQueries.Neo4jQueries
             return trams;
         }
 
-        private TramRoute GenerateTramRoute()
+        private TramRoute GenerateTramRoute(Guid stationFrom, Guid stationTo)
         {
             return new TramRoute()
             {
-                stationFrom = currentStationFrom,
-                stationTo = currentStationTo,
+                stationFrom = stationFrom,
+                stationTo = stationTo,
                 travelsThrough = GenerateTrams()
             };
         }
